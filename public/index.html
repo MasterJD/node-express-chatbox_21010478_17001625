@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <section class="section" style="height: 100vh;">
+        <section class="container">
+            <section class="columns">
+                    <section class="column">
+                            <section class="content">
+                                <div class="scrollable" id="chatbox">
+                                        <h5>Chat</h5>
+                                        <hr>
+                                </div>                               
+                            </section>
+    
+                            <section class="content">
+                                    <div class="field has-addons">
+                                            <p class="control is-expanded">
+                                                <input id="input-message" class="input" type="text" placeholder="Type a message...">
+                                            </p>
+                                            <p class="control">
+                                                <a id="send-message" class="button is-outlined">
+                                                    <span class="icon">
+                                                        <i class="fas fa-paper-plane"></i>
+                                                    </span>     
+                                                </a>
+                                            </p>
+                                        </div>
+                            </section>
+                            
+                            <section class="content">
+                            <div class="field has-addons">
+                                    <p class="control is-expanded">
+                                        <input id="input-name" class="input" type="text" placeholder="Change name...">
+                                    </p>
+                                    <p class="control">
+                                        <a id="set-name" class="button is-outlined">
+                                        <span class="icon is-small">
+                                                <i class="fas fa-user-alt"></i>
+                                        </span>
+                                
+                                        </a>
+                                    </p>
+                                </div> 
+                            </section>
+                    </section>
+
+                    <section class="column is-3">
+                        <section class="content">
+                            <p class="help">Developed by <span style="color: navy;" class="system-text">Daniel Corcoran</span></p>
+                            <div class="">
+                                <a href="https://github.com/danielc92/node-express-chatbox" class="button is-fullwidth is-small is-link is-outlined">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Source Code</span>
+                                </a>
+                            </div>
+                            
+                        </section>
+                        <section class="content">
+                            <h5>User details</h5>
+                            <hr>
+                            <p class="help">session id: <span id="current-id" class="id-text"></span></p>
+                            <p class="help">name: <span id="current-username" class="name-text"></span></p>
+                            
+                        </section>
+                        <section class="content">
+                            <h5>System</h5>
+                            <hr>
+                            <div class="scrollable" id="system-panel"></div>
+                        </section>
+
+                    </section>
+            </section>
+        </section>
+    </section>
+
+    </section>
+    <script src="js/chat.js"></script>
+</body>
+</html>
