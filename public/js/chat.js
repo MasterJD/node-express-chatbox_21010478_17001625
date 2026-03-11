@@ -18,7 +18,7 @@ function randFromArray(array) {
 /*
 Global Variables
 */
-var url = 'http://localhost:3001';
+var url = window.location.origin;
 var socket_id;
 var socket = io(url);
 var current_id = document.getElementById('current-id');
@@ -113,6 +113,17 @@ function returnTimestamp () {
 
 
 /*
+[HELPER] Sanitize user input to prevent XSS attacks
+Escapes HTML special characters in a string
+*/
+function sanitize(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+
+/*
 Listen for 'chat-message' messages from server
 Append name and message to chatbox innerHTML
 If user id matches current, align text to right to differentiate from group
@@ -121,7 +132,7 @@ socket.on('chat-message', (data)=>{
     let alignClass = (socket.id === data.id) ?  'has-text-right' : '';
     chatbox.innerHTML += 
     `<div class="notification is-white fade-in ${alignClass}">
-        <p><strong>${data.name}</strong>: ${data.message}<br><span class="help has-text-grey">${returnTimestamp()}</span></p></div>`
+        <p><strong>${sanitize(data.name)}</strong>: ${sanitize(data.message)}<br><span class="help has-text-grey">${returnTimestamp()}</span></p></div>`
     adjustScrollHeight(chatbox);
 })
 
@@ -132,7 +143,7 @@ Append results to system innerHTML
 */
 socket.on('name-change', (data) => {
     system.innerHTML += `<div class="notification is-white fade-in">
-                            <p class="system-text help"><span class="id-text">${data.id}</span> changed name from <span class="name-text">${data.previousName}</span> to <span class="name-text">${data.newName}</span></p>
+                            <p class="system-text help"><span class="id-text">${sanitize(data.id)}</span> changed name from <span class="name-text">${sanitize(data.previousName)}</span> to <span class="name-text">${sanitize(data.newName)}</span></p>
                          </div>`
     adjustScrollHeight(system);
 })
@@ -144,7 +155,7 @@ Append results to system innerHTML
 */
 socket.on('system', (data) => {
     system.innerHTML += `<div class="notification is-white fade-in">
-                            <p class="system-text help"><span class="id-text">${data.id}</span> has joined the chat.</p>
+                            <p class="system-text help"><span class="id-text">${sanitize(data.id)}</span> has joined the chat.</p>
                         </div>`
     adjustScrollHeight(system);
 })
